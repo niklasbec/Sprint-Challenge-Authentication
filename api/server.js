@@ -9,6 +9,7 @@ const jokesRouter = require('../jokes/jokes-router.js');
 
 const server = express();
 
+server.use(express.static('client/public'))
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
