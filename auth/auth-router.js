@@ -23,7 +23,9 @@ router.get('/users', restrict, (req, res) => {
     .then(users => {
       res.json(users);
     })
-    .catch(err => res.send(err));
+    .catch(err => {
+      res.status(400).json({ message: 'no auth' });
+    });
 });
 
 router.post('/login', (req, res) => {
@@ -38,11 +40,11 @@ router.post('/login', (req, res) => {
           message: `Welcome ${user.username}!`
         });
       } else {
-        res.status(401).json({ message: 'Invalid Credentials' });
+        res.status(400).json({ message: 'Invalid Credentials' });
       }
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(500).json({error: 'Server error'});
     });
 });
 
